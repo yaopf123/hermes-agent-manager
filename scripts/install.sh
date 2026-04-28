@@ -104,7 +104,7 @@ if [ "$CREATE_DEFAULT_AGENT" = "true" ]; then
   UPSTREAM_MODEL="$UPSTREAM_MODEL" UPSTREAM_API_KEY="$UPSTREAM_API_KEY" \
   UPSTREAM_PROVIDER="$UPSTREAM_PROVIDER" UPSTREAM_CONTEXT_LENGTH="$UPSTREAM_CONTEXT_LENGTH" \
   UPSTREAM_MAX_TOKENS="$UPSTREAM_MAX_TOKENS" START_DEFAULT_AGENT="$START_DEFAULT_AGENT" \
-  python3 scripts/create-default-agent.py
+  "$APP_DIR/.venv/bin/python" scripts/create-default-agent.py
 fi
 
 echo "Hermes Manager installed."
