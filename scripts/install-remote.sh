@@ -3,17 +3,17 @@ set -euo pipefail
 
 # Remote one-line installer for GitHub-hosted deployments.
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/OWNER/REPO/main/scripts/install-remote.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/yaopf123/hermes-agent-manager/main/scripts/install-remote.sh | bash
 # Or override:
-#   GITHUB_REPO=OWNER/REPO GITHUB_REF=main bash install-remote.sh
+#   GITHUB_REPO=yaopf123/hermes-agent-manager GITHUB_REF=main bash install-remote.sh
 
-GITHUB_REPO="${GITHUB_REPO:-OWNER/REPO}"
+GITHUB_REPO="${GITHUB_REPO:-yaopf123/hermes-agent-manager}"
 GITHUB_REF="${GITHUB_REF:-main}"
 INSTALL_TMP="${INSTALL_TMP:-$(mktemp -d)}"
 
-if [ "$GITHUB_REPO" = "OWNER/REPO" ]; then
-  echo "Set GITHUB_REPO=OWNER/REPO before running this installer." >&2
-  echo "Example: curl -fsSL https://raw.githubusercontent.com/OWNER/REPO/main/scripts/install-remote.sh | GITHUB_REPO=OWNER/REPO bash" >&2
+if [ "$GITHUB_REPO" = "yaopf123/hermes-agent-manager" ]; then
+  echo "Set GITHUB_REPO=yaopf123/hermes-agent-manager before running this installer." >&2
+  echo "Example: curl -fsSL https://raw.githubusercontent.com/yaopf123/hermes-agent-manager/main/scripts/install-remote.sh | GITHUB_REPO=yaopf123/hermes-agent-manager bash" >&2
   exit 2
 fi
 

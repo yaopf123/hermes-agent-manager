@@ -18,24 +18,24 @@ It supports:
 After publishing this repo to GitHub, users can install with:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/OWNER/REPO/main/scripts/install-remote.sh | GITHUB_REPO=OWNER/REPO bash
+curl -fsSL https://raw.githubusercontent.com/yaopf123/hermes-agent-manager/main/scripts/install-remote.sh | GITHUB_REPO=yaopf123/hermes-agent-manager bash
 ```
 
 Recommended with explicit token:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/OWNER/REPO/main/scripts/install-remote.sh | \
-  GITHUB_REPO=OWNER/REPO \
+curl -fsSL https://raw.githubusercontent.com/yaopf123/hermes-agent-manager/main/scripts/install-remote.sh | \
+  GITHUB_REPO=yaopf123/hermes-agent-manager \
   HERMES_MANAGER_TOKEN="change-me-long-random-token" \
   bash
 ```
 
-Replace `OWNER/REPO` with your real GitHub repository, for example `yaopf/hermes-agent-manager`.
+Replace `yaopf123/hermes-agent-manager` with your real GitHub repository, for example `yaopf123/hermes-agent-manager`.
 
 ## Manual Install
 
 ```bash
-git clone https://github.com/OWNER/REPO.git
+git clone https://github.com/yaopf123/hermes-agent-manager.git
 cd REPO
 HERMES_MANAGER_TOKEN="your-token" ./scripts/install.sh
 ```
