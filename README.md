@@ -30,8 +30,6 @@ curl -fsSL https://raw.githubusercontent.com/yaopf123/hermes-agent-manager/main/
   bash
 ```
 
-Replace `yaopf123/hermes-agent-manager` with your real GitHub repository, for example `yaopf123/hermes-agent-manager`.
-
 ## Manual Install
 
 ```bash

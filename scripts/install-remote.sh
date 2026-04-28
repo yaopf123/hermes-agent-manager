@@ -11,12 +11,6 @@ GITHUB_REPO="${GITHUB_REPO:-yaopf123/hermes-agent-manager}"
 GITHUB_REF="${GITHUB_REF:-main}"
 INSTALL_TMP="${INSTALL_TMP:-$(mktemp -d)}"
 
-if [ "$GITHUB_REPO" = "yaopf123/hermes-agent-manager" ]; then
-  echo "Set GITHUB_REPO=yaopf123/hermes-agent-manager before running this installer." >&2
-  echo "Example: curl -fsSL https://raw.githubusercontent.com/yaopf123/hermes-agent-manager/main/scripts/install-remote.sh | GITHUB_REPO=yaopf123/hermes-agent-manager bash" >&2
-  exit 2
-fi
-
 need() {
   command -v "$1" >/dev/null 2>&1 || { echo "Missing required command: $1" >&2; exit 1; }
 }
