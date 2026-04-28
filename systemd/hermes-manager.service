@@ -1,0 +1,21 @@
+[Unit]
+Description=Hermes Agent Manager Web UI
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=CHANGE_ME_APP_DIR
+Environment=HERMES_MANAGER_TOKEN=CHANGE_ME_TOKEN
+Environment=HERMES_MANAGER_SECRET=CHANGE_ME_SECRET
+Environment=HERMES_MANAGER_APP_DIR=CHANGE_ME_APP_DIR
+Environment=HERMES_DOCKER_ROOT=CHANGE_ME_HERMES_DIR
+Environment=HERMES_MANAGER_PUBLIC_HOST=CHANGE_ME_PUBLIC_HOST
+ExecStart=CHANGE_ME_APP_DIR/.venv/bin/gunicorn -w 2 -b 0.0.0.0:8787 app:app
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

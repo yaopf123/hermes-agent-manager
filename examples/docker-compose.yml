@@ -1,0 +1,23 @@
+services:
+  hermes-coder:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-coder
+    restart: unless-stopped
+    command: gateway run
+    ports:
+      - "8642:8642"
+    volumes:
+      - /home/ypf/hermes-docker/coder:/opt/data
+      - /home/ypf/hermes-docker/patches/weixin.py:/opt/hermes/gateway/platforms/weixin.py:ro
+    shm_size: 1gb
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      - OPENAI_API_KEY=sk-no-key-required
+      - HERMES_INFERENCE_PROVIDER=custom
+      - GATEWAY_ALLOW_ALL_USERS=true
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2.0"

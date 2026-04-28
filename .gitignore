@@ -1,0 +1,21 @@
+# Secrets and local state
+.env
+*.env
+models.yaml
+*.key
+*.token
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Large/offline artifacts. Publish these via GitHub Releases instead.
+docker-images/
+*.tar
+*.tar.gz
+*.tgz
+
+# macOS
+.DS_Store
+._*

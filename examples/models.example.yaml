@@ -1,0 +1,17 @@
+models:
+- id: dashscope-qwen3-6-plus
+  name: DashScope Qwen 3.6 Plus
+  provider: custom
+  base_url: https://coding.dashscope.aliyuncs.com/v1
+  model: qwen3.6-plus
+  api_key: CHANGE_ME
+  context_length: '262144'
+  max_tokens: '8192'
+- id: local-llama-qwen36
+  name: Local llama.cpp Qwen3.6 35B
+  provider: custom
+  base_url: http://YOUR_SERVER_IP:8080/v1
+  model: Qwen3.6-35B-A3B-Q4_K_M.gguf
+  api_key: ''
+  context_length: '131072'
+  max_tokens: '8192'

@@ -1,0 +1,17 @@
+[Unit]
+Description=Hermes Agent Manager Web UI
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ypf/hermes-manager
+Environment=HERMES_MANAGER_TOKEN=6c8343f72a230b60dfd020a449903357
+Environment=HERMES_MANAGER_SECRET=6c8343f72a230b60dfd020a449903357
+Environment=PORT=8787
+ExecStart=/home/ypf/hermes-manager/.venv/bin/gunicorn -w 2 -b 0.0.0.0:8787 app:app
+Restart=unless-stopped
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
