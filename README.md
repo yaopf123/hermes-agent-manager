@@ -4,6 +4,7 @@ A lightweight web manager for running multiple isolated [Hermes Agent](https://g
 
 It supports:
 
+- Real one-command install: Docker check/install, image pull, manager setup, default agent creation, and agent start.
 - Create, start, stop, restart, and delete Hermes agents.
 - Per-agent Docker workspace isolation.
 - Model preset library with edit/test/apply actions.
@@ -15,18 +16,40 @@ It supports:
 
 ## Quick Install From GitHub
 
-After publishing this repo to GitHub, users can install with:
+This installs Docker when needed, pulls `nousresearch/hermes-agent:latest`, installs Hermes Manager, creates one default isolated Hermes agent, and starts it.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/yaopf123/hermes-agent-manager/main/scripts/install-remote.sh | GITHUB_REPO=yaopf123/hermes-agent-manager bash
 ```
 
-Recommended with explicit token:
+Recommended cloud-model install:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/yaopf123/hermes-agent-manager/main/scripts/install-remote.sh | \
   GITHUB_REPO=yaopf123/hermes-agent-manager \
   HERMES_MANAGER_TOKEN="change-me-long-random-token" \
+  HERMES_MANAGER_PUBLIC_HOST="SERVER_IP" \
+  DEFAULT_AGENT_NAME="coder" \
+  DEFAULT_AGENT_PORT="8642" \
+  UPSTREAM_BASE_URL="https://coding.dashscope.aliyuncs.com/v1" \
+  UPSTREAM_MODEL="qwen3.6-plus" \
+  UPSTREAM_API_KEY="sk-your-key" \
+  bash
+```
+
+Local llama.cpp install example:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/yaopf123/hermes-agent-manager/main/scripts/install-remote.sh | \
+  GITHUB_REPO=yaopf123/hermes-agent-manager \
+  HERMES_MANAGER_TOKEN="change-me-long-random-token" \
+  HERMES_MANAGER_PUBLIC_HOST="SERVER_IP" \
+  DEFAULT_AGENT_NAME="coder" \
+  DEFAULT_AGENT_PORT="8642" \
+  UPSTREAM_BASE_URL="http://SERVER_IP:8080/v1" \
+  UPSTREAM_MODEL="Qwen3.6-35B-A3B-Q4_K_M.gguf" \
+  UPSTREAM_API_KEY="sk-no-key-required" \
+  UPSTREAM_CONTEXT_LENGTH="131072" \
   bash
 ```
 
@@ -92,6 +115,33 @@ Or:
 
 For GitHub publishing, upload `hermes-agent_latest.tar.gz` to GitHub Releases instead of committing it.
 
+## Install Options
+
+Common environment variables:
+
+```bash
+HERMES_MANAGER_TOKEN=change-me
+HERMES_MANAGER_PUBLIC_HOST=SERVER_IP
+APP_DIR=/home/ypf/hermes-manager
+HERMES_DIR=/home/ypf/hermes-docker
+HERMES_AGENT_IMAGE=nousresearch/hermes-agent:latest
+INSTALL_DOCKER=auto        # auto|true|false
+PULL_HERMES_IMAGE=true
+CREATE_DEFAULT_AGENT=true
+START_DEFAULT_AGENT=true
+DEFAULT_AGENT_NAME=coder
+DEFAULT_AGENT_PORT=8642
+DEFAULT_AGENT_API_KEY=hermes-coder-local-key
+DEFAULT_AGENT_API_MODEL=hermes-coder
+UPSTREAM_BASE_URL=https://coding.dashscope.aliyuncs.com/v1
+UPSTREAM_MODEL=qwen3.6-plus
+UPSTREAM_API_KEY=sk-...
+UPSTREAM_CONTEXT_LENGTH=262144
+UPSTREAM_MAX_TOKENS=8192
+```
+
+Set `CREATE_DEFAULT_AGENT=false` if you only want the web manager and prefer to create agents later from the UI.
+
 ## Configuration
 
 Model presets live here on the server:
@@ -127,6 +177,13 @@ cd /home/ypf/hermes-docker
 docker compose ps
 docker compose up -d
 docker compose restart
+```
+
+Default agent after install:
+
+```bash
+curl http://SERVER_IP:8642/v1/models \
+  -H "Authorization: Bearer hermes-coder-local-key"
 ```
 
 ## Security

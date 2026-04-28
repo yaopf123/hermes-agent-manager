@@ -574,7 +574,7 @@ def create_agent():
         ],
         'shm_size': '1gb',
         'extra_hosts': ['host.docker.internal:host-gateway'],
-        'environment': ['OPENAI_API_KEY=sk-no-key-required', 'HERMES_INFERENCE_PROVIDER=custom', 'GATEWAY_ALLOW_ALL_USERS=true'],
+        'environment': ['GATEWAY_ALLOW_ALL_USERS=true'],
         'deploy': {'resources': {'limits': {'memory': '4G', 'cpus': '2.0'}}},
     }
     save_compose(data)
