@@ -10,6 +10,11 @@ __pycache__/
 *.py[cod]
 .venv/
 
+# Node / Tauri
+node_modules/
+desktop/dist/
+desktop/src-tauri/target/
+
 # Large/offline artifacts. Publish these via GitHub Releases instead.
 docker-images/
 *.tar

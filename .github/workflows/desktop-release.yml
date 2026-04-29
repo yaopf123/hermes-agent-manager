@@ -1,0 +1,70 @@
+name: desktop-release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "desktop-v*"
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-latest
+            name: macos
+          - platform: windows-latest
+            name: windows
+          - platform: ubuntu-24.04
+            name: linux
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Linux dependencies
+        if: matrix.name == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Install frontend dependencies
+        working-directory: desktop
+        run: npm install
+
+      - name: Build macOS desktop bundle
+        if: matrix.name == 'macos'
+        working-directory: desktop
+        run: |
+          npm run desktop:build:app
+          npm run desktop:build:macos-dmg
+
+      - name: Build Windows desktop bundle
+        if: matrix.name == 'windows'
+        working-directory: desktop
+        run: npm run tauri build -- --bundles nsis
+
+      - name: Build Linux desktop bundle
+        if: matrix.name == 'linux'
+        working-directory: desktop
+        run: npm run tauri build -- --bundles deb,rpm,appimage
+
+      - name: Upload bundles
+        uses: actions/upload-artifact@v4
+        with:
+          name: hermes-agent-manager-${{ matrix.name }}
+          path: |
+            desktop/src-tauri/target/release/bundle/**/*.dmg
+            desktop/src-tauri/target/release/bundle/**/*.exe
+            desktop/src-tauri/target/release/bundle/**/*.msi
+            desktop/src-tauri/target/release/bundle/**/*.deb
+            desktop/src-tauri/target/release/bundle/**/*.rpm
+            desktop/src-tauri/target/release/bundle/**/*.AppImage

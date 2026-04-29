@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Hermes Agent Manager",
+  "version": "0.1.0",
+  "identifier": "com.yaopf.hermes-agent-manager",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Hermes Agent Manager",
+        "width": 1120,
+        "height": 780,
+        "minWidth": 940,
+        "minHeight": 680
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["dmg", "nsis", "deb", "rpm", "appimage"],
+    "category": "DeveloperTool",
+    "shortDescription": "Deploy and manage Hermes agents",
+    "longDescription": "A desktop installer and controller for Hermes Agent Manager, Docker based Hermes agents, model presets, and WeChat binding.",
+    "resources": [],
+    "externalBin": [],
+    "copyright": "Copyright 2026",
+    "license": "MIT",
+    "createUpdaterArtifacts": false,
+    "macOS": {
+      "minimumSystemVersion": "12.0",
+      "dmg": {
+        "appPosition": {
+          "x": 180,
+          "y": 170
+        },
+        "applicationFolderPosition": {
+          "x": 480,
+          "y": 170
+        }
+      }
+    },
+    "windows": {
+      "nsis": {
+        "displayLanguageSelector": false,
+        "installMode": "perMachine",
+        "languages": ["SimpChinese", "English"]
+      }
+    },
+    "linux": {
+      "deb": {
+        "depends": []
+      }
+    }
+  }
+}

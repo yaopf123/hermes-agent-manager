@@ -13,6 +13,52 @@ It supports:
 - Weixin media-send patch for PPT/Word/file delivery.
 - Custom Office skills for better PPT and Word output.
 - Optional offline Docker image loading.
+- Desktop installer preview for Windows/macOS/Linux packaging.
+
+## Desktop App
+
+The first desktop version lives in `desktop/`. It is a Tauri app that can:
+
+- deploy Hermes Manager to a remote Linux server over SSH;
+- run local install on Linux/macOS;
+- create and start the default Hermes agent during install;
+- test the Manager URL;
+- open the web Manager after deployment;
+- show installer logs in the desktop window.
+
+Development:
+
+```bash
+cd desktop
+npm install
+npm run build
+npm run desktop:dev
+```
+
+Build a native package on the current OS:
+
+```bash
+cd desktop
+npm run desktop:build
+```
+
+On macOS this builds a `.app` and creates a simple `.dmg`. You can run those steps manually too:
+
+```bash
+cd desktop
+npm run desktop:build:app
+npm run desktop:build:macos-dmg
+```
+
+Configured bundle targets:
+
+```text
+Windows: NSIS .exe
+macOS: .dmg
+Linux: .deb / .rpm / AppImage
+```
+
+Remote deployment from the desktop app requires `ssh`. Password mode also requires `sshpass` on the desktop machine. Key-based SSH works without `sshpass`.
 
 ## Quick Install From GitHub
 

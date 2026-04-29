@@ -1,0 +1,20 @@
+[package]
+name = "hermes-agent-manager-desktop"
+version = "0.1.0"
+description = "Desktop installer and controller for Hermes Agent Manager"
+authors = ["Hermes Agent Manager"]
+edition = "2021"
+
+[lib]
+name = "hermes_agent_manager_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.5.1", features = [] }
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tauri = { version = "2.9.5", features = [] }
+ureq = { version = "3.1.4", default-features = true }
+open = "5.3.3"
+
